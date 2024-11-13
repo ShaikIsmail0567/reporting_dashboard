@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+    <h2>Your Report Entries</h2>
+        <form action="/logout" method="GET" style="background-color: unset; float: right; box-shadow: none;">
+            <button type="submit" class="btn btn-danger">Logout</button>
+        </form>
+    
+    <form action="/user/dashboard" method="GET">
+        <label for="feedID">Feed ID:</label>
+        <input type="text" id="feedID" name="feedID" value="<%= feedID || '' %>">
+        
+        <label for="dateFrom">Date From:</label>
+        <input type="date" id="dateFrom" name="dateFrom" value="<%= dateFrom || '' %>">
+        
+        <label for="dateTo">Date To:</label>
+        <input type="date" id="dateTo" name="dateTo" value="<%= dateTo || '' %>">
+        
+        <button type="submit">Search</button>
+        <a href="/user/dashboard" class="btn btn-secondary">Clear Filter</a>
+        <a href="/dashboard/download-csv" class="btn btn-primary">Download CSV</a>
+    </form>
+    
+    
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Feed ID</th>
+                <th>Payout</th>
+                <th>Searches</th>
+                <th>Clicks</th>
+                <th>CTR</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% reports.forEach(report => { %>
+                <tr>
+                    <td><%= report.date.toISOString().split('T')[0] %></td>
+                    <td><%= report.feedID %></td>
+                    <td><%= report.payout %></td>
+                    <td><%= report.searches %></td>
+                    <td><%= report.clicks %></td>
+                    <td><%= report.ctr.toFixed(2) %> %</td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>

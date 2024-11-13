@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="/css/styles.css">
+
+</head>
+<body>
+    <h2>Enter Report Data for User</h2>
+    <div class="header">
+        <h2>Welcome, <%= user.username %></h2>
+        <form action="/logout" method="GET" style="display:inline;">
+            <button type="submit" class="btn btn-danger">Logout</button>
+        </form>
+    </div>
+    
+<form action="/admin/entry" method="POST">
+    <label for="user">Select User:</label>
+    <select name="userID" id="user" required>
+        <% users.forEach(user => { %>
+            console.log("user",user);
+            <option value="<%= user._id %>"><%= user.username %></option>
+        <% }) %>
+    </select>    
+    
+    <label for="date">Date:</label>
+    <input type="date" name="date" required>
+
+    <label for="feedID">Feed ID:</label>
+    <input type="text" name="feedID" required>
+
+    <label for="payout">Payout:</label>
+    <input type="number" name="payout" required>
+
+    <label for="searches">Searches:</label>
+    <input type="number" name="searches" required>
+
+    <label for="clicks">Clicks:</label>
+    <input type="number" name="clicks" required>
+
+    <button type="submit">Submit</button>
+</form>
+
+</body>
+</html>

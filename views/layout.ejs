@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporting Dashboard</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/dashboard">Dashboard</a>
+            <% if (user && user.role === 'admin') { %>
+                <a href="/admin">Admin Panel</a>
+            <% } %>
+            <% if (user) { %>
+                <a href="/logout">Logout</a>
+            <% } else { %>
+                <a href="/login">Login</a>
+                <a href="/signup">Signup</a>
+            <% } %>
+        </nav>
+    </header>
+    <main>
+        <!-- This section will be replaced by the content of each page -->
+        <%- body %>
+    </main>
+</body>
+</html>

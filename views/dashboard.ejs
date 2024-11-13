@@ -1,0 +1,38 @@
+<%- include('layout', { body: '' }) %>
+<h2>Dashboard</h2>
+<form id="filterForm" method="GET" action="/dashboard">
+    <label for="date">Date:</label>
+    <input type="date" name="date">
+
+    <label for="feedId">Feed ID:</label>
+    <input type="text" name="feedId">
+
+    <button type="submit">Filter</button>
+</form>
+
+<a href="/dashboard/download-csv">Download CSV</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Feed ID</th>
+            <th>Payout</th>
+            <th>Searches</th>
+            <th>Clicks</th>
+            <th>CTR (%)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% reports.forEach(report => { %>
+            <tr>
+                <td><%= report.date.toDateString() %></td>
+                <td><%= report.feedId %></td>
+                <td><%= report.payout %></td>
+                <td><%= report.searches %></td>
+                <td><%= report.clicks %></td>
+                <td><%= (report.ctr).toFixed(2) %></td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>
