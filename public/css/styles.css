@@ -118,9 +118,9 @@ a {
     padding: 5px 10px;
 }
 
-a:hover {
+/* a:hover {
     text-decoration: underline;
-}
+} */
 
 /* Button styles */
 /* .btn {
