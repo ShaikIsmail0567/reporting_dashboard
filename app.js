@@ -28,6 +28,11 @@ app.post('/signup', userController.signup);
 app.get('/login', (req, res) => res.render('login'));
 app.post('/login', userController.login);
 
+// Redirect root route to login page
+app.get('/', (req, res) => {
+    res.redirect('/login');
+});
+
 // Admin Dashboard Route
 app.get('/admin', userController.authenticate, async (req, res) => {
     if (req.user.role !== 'admin') return res.redirect('/dashboard');
