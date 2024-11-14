@@ -11,7 +11,7 @@ exports.signup = async (req, res) => {
     try{
 
         let user = new User({ username, password, role: 'user' });
-        User.hashPassword();
+        user.hashPassword();
         await user.save();
         res.redirect('/login');
     }
