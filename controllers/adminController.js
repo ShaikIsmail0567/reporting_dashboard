@@ -57,7 +57,7 @@ exports.getUserReports = async (req, res) => {
 
 exports.downloadCSV = async (req, res) => {
     try {
-        console.log("user",req.user);
+        // console.log("user",req.user);
         const userID = req.user.id;
         const userReports = await Report.find({ userID });
 

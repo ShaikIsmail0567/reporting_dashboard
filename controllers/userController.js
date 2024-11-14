@@ -22,9 +22,9 @@ exports.signup = async (req, res) => {
 
 exports.login = async (req, res) => {
     const { username, password } = req.body;
-    console.log(username, password);
+    // console.log(username, password);
     const user = await User.findOne({ username });
-    console.log("user in login",user)
+    // console.log("user in login",user)
     
     if (!user || !(await user.comparePassword(password))) {
         return res.status(401).send('Invalid credentials');
@@ -34,7 +34,7 @@ exports.login = async (req, res) => {
         return res.status(403).send('Unauthorized access to admin');
     }
     if (user && user.comparePassword(password)) {
-        console.log("user in login",user)
+        // console.log("user in login",user)
         const token = jwt.sign({ id: user._id, role: user.role }, 'secretkey', { expiresIn: '1h' });
         res.cookie('token', token);
         return res.redirect(user.role === 'admin' ? '/admin' : '/user/dashboard');
@@ -45,7 +45,7 @@ exports.login = async (req, res) => {
 exports.authenticate = (req, res, next) => {
     const token = req.cookies.token;
     if (!token) return res.redirect('/login');
-    console.log("Authentication middleware called.");
+    // console.log("Authentication middleware called.");
     jwt.verify(token, 'secretkey', (err, decoded) => {
         if (err) return res.redirect('/login');
         req.user = decoded;

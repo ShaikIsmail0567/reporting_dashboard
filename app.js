@@ -96,7 +96,7 @@ app.get('/dashboard', userController.authenticate, async (req, res) => {
         // console.log("user", req.user)
         const userID = req.user.id;  // Get logged-in user's ID
         const userReports = await Report.find({ userID });
-        console.log("userReports", userReports)
+        // console.log("userReports", userReports)
         res.render('user_dashboard', { reports: userReports });
     } catch (err) {
         res.status(500).send('Error loading user dashboard');
@@ -105,13 +105,13 @@ app.get('/dashboard', userController.authenticate, async (req, res) => {
 
 app.get('/user/dashboard',userController.authenticate,async (req, res) => {
     try {
-        console.log('Authenticated user:', req.user);
+        // console.log('Authenticated user:', req.user);
         const userID = req.user.id; // Get the user's ID
         const username = req.user.username; // Get the user's username
         
         // // Find reports related to this user only
         // const userReports = await Report.find({ userID });
-        console.log("userId",userID,username);
+        // console.log("userId",userID,username);
         const filters = {userID};
 
         // Apply filters based on query parameters
@@ -125,14 +125,14 @@ app.get('/user/dashboard',userController.authenticate,async (req, res) => {
         // Add userID filter to only get the logged-in user's reports
         filters.userID = userID;
         const userReports = await Report.find(filters);
-        console.log("userReports",userReports)
-        console.log("user dashboard",{
-            username,
-            reports: userReports,
-            feedID: req.query.feedID || '',
-            dateFrom: req.query.dateFrom || '',
-            dateTo: req.query.dateTo || ''
-        });
+        // console.log("userReports",userReports)
+        // console.log("user dashboard",{
+        //     username,
+        //     reports: userReports,
+        //     feedID: req.query.feedID || '',
+        //     dateFrom: req.query.dateFrom || '',
+        //     dateTo: req.query.dateTo || ''
+        // });
         res.render('user_dashboard', {
             username,
             reports: userReports,
