@@ -13,6 +13,7 @@ exports.signup = async (req, res) => {
         let user = new User({ username, password, role: 'user' });
         user.hashPassword();
         await user.save();
+        console.log("user created",user)
         res.redirect('/login');
     }
     catch (error) {

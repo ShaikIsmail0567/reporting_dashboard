@@ -4,28 +4,51 @@
     <meta charset="UTF-8">
     <title>User Dashboard</title>
     <link rel="stylesheet" href="/css/styles.css">
+    <link rel="icon" type="image/x-icon" href="/images/AppStellr-13.png">
 </head>
 <body>
+    <!-- <header> -->
+        <div class="logo-container">
+
+            <img src="/images/AppStellr-12.png" alt="Logo" class="logo"> <!-- Logo -->
+            <form action="/logout" method="GET" style="background-color: unset; box-shadow: none;">
+                <button type="submit" class="btn btn-danger">Logout</button>
+            </form>
+
+        </div>
+    <!-- </header> -->
 
     <h2>Your Report Entries</h2>
-        <form action="/logout" method="GET" style="background-color: unset; float: right; box-shadow: none;">
+        <!-- <form action="/logout" method="GET" style="background-color: unset; float: right; box-shadow: none;">
             <button type="submit" class="btn btn-danger">Logout</button>
-        </form>
+        </form> -->
     
-    <form action="/user/dashboard" method="GET">
-        <label for="feedID">Feed ID:</label>
-        <input type="text" id="feedID" name="feedID" value="<%= feedID || '' %>">
+        <form action="/user/dashboard" method="GET" class="filter-form">
+            <!-- Input Row -->
+            <div class="filter-row">
+                <div class="filter-item">
+                    <label for="feedID">Feed ID:</label>
+                    <input type="text" id="feedID" name="feedID" value="<%= feedID || '' %>">
+                </div>
+                <div class="filter-item">
+                    <label for="dateFrom">Date From:</label>
+                    <input type="date" id="dateFrom" name="dateFrom" value="<%= dateFrom || '' %>">
+                </div>
+                <div class="filter-item">
+                    <label for="dateTo">Date To:</label>
+                    <input type="date" id="dateTo" name="dateTo" value="<%= dateTo || '' %>">
+                </div>
+            </div>
         
-        <label for="dateFrom">Date From:</label>
-        <input type="date" id="dateFrom" name="dateFrom" value="<%= dateFrom || '' %>">
+            <!-- Button Row -->
+            <div class="filter-actions">
+                <button type="submit" class="btn btn-submit">Search</button>
+                <a href="/user/dashboard" class="btn btn-secondary">Clear Filter</a>
+                <a href="/dashboard/download-csv" class="btn btn-primary">Download CSV</a>
+            </div>
+        </form>
         
-        <label for="dateTo">Date To:</label>
-        <input type="date" id="dateTo" name="dateTo" value="<%= dateTo || '' %>">
         
-        <button type="submit">Search</button>
-        <a href="/user/dashboard" class="btn btn-secondary">Clear Filter</a>
-        <a href="/dashboard/download-csv" class="btn btn-primary">Download CSV</a>
-    </form>
     
     
     
@@ -45,7 +68,7 @@
                 <tr>
                     <td><%= report.date.toISOString().split('T')[0] %></td>
                     <td><%= report.feedID %></td>
-                    <td><%= report.payout %></td>
+                    <td>$<%= report.payout %></td>
                     <td><%= report.searches %></td>
                     <td><%= report.clicks %></td>
                     <td><%= report.ctr.toFixed(2) %> %</td>

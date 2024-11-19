@@ -11,6 +11,22 @@ h2 {
 }
 
 form {
+    /* margin: 20px auto; */
+    max-width: 600px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.admin-form {
+    margin: 20px auto;
+    max-width: 600px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.login-form {
     margin: 20px auto;
     max-width: 600px;
     padding: 20px;
@@ -50,7 +66,7 @@ button:hover {
     background-color: #0056b3;
 }
 
-table {
+/* table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
@@ -69,9 +85,9 @@ th {
 
 tr:hover {
     background-color: #f1f1f1;
-}
+} */
 .btn-secondary {
-    background-color: #ddd;
+    /* background-color: #ddd; */
     color: #333;
     padding: 5px 10px;
     border: none;
@@ -84,7 +100,7 @@ tr:hover {
 }
 
 
-input[type="text"],
+/* input[type="text"], */
 input[type="password"],
 input[type="email"],
 button {
@@ -140,6 +156,9 @@ a {
 } */
 
 .btn-danger {
+    /* margin-left: auto; */
+    margin: 0;
+    align-self: center;
     background-color: #dc3545;
     color: #fff;
     border: none;
@@ -154,4 +173,185 @@ a {
 
 .btn:hover {
     opacity: 0.9;
+}
+
+.filter-container {
+    display: flex;
+    align-items: center; /* Center items vertically */
+    gap: 20px; /* Space between items */
+}
+
+.filter-container input,
+.filter-container select {
+    padding: 10px;
+    font-size: 14px;
+}
+/* Horizontal filter arrangement */
+/* .filter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 20px;
+} */
+
+/* Logo styling */
+/* .logo {
+    height: 50px;
+    margin-bottom: 20px;
+}
+
+/* Favicon styling */
+/* img.logo {
+    height: 50px;
+    margin: 10px;
+} */
+.logo-container {
+    display: flex; /* Flexbox for horizontal alignment */
+    align-items: center; /* Vertically align items */
+    justify-content: space-between; /* Space between logo and logout button */
+    margin-bottom: 20px;
+    padding: 10px 20px; /* Optional: Add some padding around the container */
+}
+
+.logo {
+    height: 120px; /* Adjust logo size */
+    width: auto; /* Maintain aspect ratio */
+    object-fit: contain; /* Prevent distortion */
+   
+}
+
+/* Background color for login page */
+.login-page {
+    background-color: #f2f2f2; /* Update with your color */
+    padding: 40px;
+    text-align: center;
+}
+/* General form styling */
+.filter-form {
+    margin: auto;
+}
+
+/* Input Row */
+.filter-row {
+    display: flex;
+    gap: 20px; /* Spacing between inputs */
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.filter-item {
+    display: flex;
+    flex-direction: column;
+    flex: 1; /* Ensures equal width for all inputs */
+}
+
+.filter-item label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.filter-item input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Button Row */
+.filter-actions {
+    display: flex;
+    gap: 15px; /* Spacing between buttons */
+    justify-content: flex-start;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 4px;
+    text-decoration: none;
+    text-align: center;
+    font-size: 14px;
+}
+
+.btn-submit {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.btn-primary {
+    background-color: #28a745;
+    color: #fff;
+}
+
+/* Button hover effects */
+.btn:hover {
+    opacity: 0.9;
+}
+
+button:focus,
+input:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+/* Table container */
+.table-container {
+    max-width: 800px; /* Limit the width */
+    margin: 20px auto; /* Center the table on the page */
+    padding: 20px; /* Add padding inside the container */
+    background-color: #fff; /* White background for the container */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for the box */
+    border: 1px solid #ddd; /* Subtle border */
+    overflow-x: auto; /* Enable horizontal scrolling if needed */
+}
+
+/* Table styling */
+table {
+    width: 100%; /* Use full width of the container */
+    border-collapse: collapse; /* Remove spacing between table cells */
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 10px; /* Add padding inside cells */
+    text-align: center; /* Align text to the left */
+    border-bottom: 1px solid #ddd; /* Add a subtle border below rows */
+    border-right: 1px solid #ddd; /* Add vertical line between columns */
+}
+
+/* Remove last column border */
+th:last-child, td:last-child {
+    border-right: none; /* No border for the last column */
+}
+
+th {
+    background-color: #f4f4f4; /* Light grey background for headers */
+    font-weight: bold; /* Make header text bold */
+}
+
+tr:hover {
+    background-color: #f1f1f1; /* Highlight row on hover */
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+    .table-container {
+        padding: 10px; /* Reduce padding on smaller screens */
+    }
+
+    th, td {
+        font-size: 14px; /* Adjust font size for smaller screens */
+        padding: 8px; /* Adjust cell padding */
+    }
 }
