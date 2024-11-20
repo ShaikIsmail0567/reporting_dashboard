@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-
-mongoose.connect('mongodb+srv://ismail:ismail@cluster0.vzy7h1u.mongodb.net/reporting?retryWrites=true&w=majority&appName=Cluster0', {
+require('dotenv').config();
+mongoose.connect(`mongodb+srv://shubhamadbundl:${process.env.DBPASS}@reporting-dashboard.ybrut.mongodb.net/reporting_dashboard?retryWrites=true&w=majority&appName=reporting-dashboard`, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });

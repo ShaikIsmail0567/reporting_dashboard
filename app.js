@@ -103,18 +103,57 @@ app.get('/dashboard', userController.authenticate, async (req, res) => {
     }
 });
 
-app.get('/user/dashboard',userController.authenticate,async (req, res) => {
-    try {
-        // console.log('Authenticated user:', req.user);
-        const userID = req.user.id; // Get the user's ID
-        const username = req.user.username; // Get the user's username
+// app.get('/user/dashboard',userController.authenticate,async (req, res) => {
+//     try {
+//         // console.log('Authenticated user:', req.user);
+//         const userID = req.user.id; // Get the user's ID
+//         const username = req.user.username; // Get the user's username
         
-        // // Find reports related to this user only
-        // const userReports = await Report.find({ userID });
-        // console.log("userId",userID,username);
-        const filters = {userID};
+//         // // Find reports related to this user only
+//         // const userReports = await Report.find({ userID });
+//         // console.log("userId",userID,username);
+//         const filters = {userID};
 
-        // Apply filters based on query parameters
+//         // Apply filters based on query parameters
+//         if (req.query.feedID) filters.feedID = req.query.feedID;
+//         if (req.query.dateFrom || req.query.dateTo) {
+//             filters.date = {};
+//             if (req.query.dateFrom) filters.date.$gte = new Date(req.query.dateFrom);
+//             if (req.query.dateTo) filters.date.$lte = new Date(req.query.dateTo);
+//         }
+
+//         // Add userID filter to only get the logged-in user's reports
+//         filters.userID = userID;
+//         const userReports = await Report.find(filters);
+//         // console.log("userReports",userReports)
+//         // console.log("user dashboard",{
+//         //     username,
+//         //     reports: userReports,
+//         //     feedID: req.query.feedID || '',
+//         //     dateFrom: req.query.dateFrom || '',
+//         //     dateTo: req.query.dateTo || ''
+//         // });
+//         res.render('user_dashboard', {
+//             username,
+//             reports: userReports,
+//             feedID: req.query.feedID || '',   // Ensure `feedID` has a default value
+//             dateFrom: req.query.dateFrom || '', // Ensure `dateFrom` has a default value
+//             dateTo: req.query.dateTo || ''    // Ensure `dateTo` has a default value
+//         });
+//     } catch (err) {
+//         res.status(500).send('Error loading user dashboard');
+//     }
+// });
+
+
+// CSV Download Route for User-Specific Reports
+
+app.get('/user/dashboard', userController.authenticate, async (req, res) => {
+    try {
+        const userID = req.user.id; // Logged-in user ID
+        const filters = { userID };
+
+        // Apply filters
         if (req.query.feedID) filters.feedID = req.query.feedID;
         if (req.query.dateFrom || req.query.dateTo) {
             filters.date = {};
@@ -122,31 +161,32 @@ app.get('/user/dashboard',userController.authenticate,async (req, res) => {
             if (req.query.dateTo) filters.date.$lte = new Date(req.query.dateTo);
         }
 
-        // Add userID filter to only get the logged-in user's reports
-        filters.userID = userID;
-        const userReports = await Report.find(filters);
-        // console.log("userReports",userReports)
-        // console.log("user dashboard",{
-        //     username,
-        //     reports: userReports,
-        //     feedID: req.query.feedID || '',
-        //     dateFrom: req.query.dateFrom || '',
-        //     dateTo: req.query.dateTo || ''
-        // });
+        // Pagination
+        const perPage = 50;
+        const page = parseInt(req.query.page) || 1;
+        const totalReports = await Report.countDocuments(filters);
+        const totalPages = Math.ceil(totalReports / perPage);
+
+        const reports = await Report.find(filters)
+            .skip((page - 1) * perPage)
+            .limit(perPage);
+
         res.render('user_dashboard', {
-            username,
-            reports: userReports,
-            feedID: req.query.feedID || '',   // Ensure `feedID` has a default value
-            dateFrom: req.query.dateFrom || '', // Ensure `dateFrom` has a default value
-            dateTo: req.query.dateTo || ''    // Ensure `dateTo` has a default value
+            username: req.user.username,
+            reports,
+            feedID: req.query.feedID || '',
+            dateFrom: req.query.dateFrom || '',
+            dateTo: req.query.dateTo || '',
+            page,
+            totalPages,
         });
     } catch (err) {
-        res.status(500).send('Error loading user dashboard');
+        res.status(500).send('Error loading dashboard');
     }
 });
 
 
-// CSV Download Route for User-Specific Reports
+
 app.get('/dashboard/download-csv', userController.authenticate, adminController.downloadCSV);
 
 // Logout Route
