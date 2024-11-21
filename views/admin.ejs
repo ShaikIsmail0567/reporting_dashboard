@@ -16,7 +16,7 @@
     
 <form action="/admin/entry" method="POST" class="admin-form">
     <label for="user">Select User:</label>
-    <select name="userID" id="user" required>
+    <select name="userID" id="user" required class="scrollable-select">
         <% users.forEach(user => { %>
             <option value="<%= user._id %>"><%= user.username %></option>
         <% }) %>
