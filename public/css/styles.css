@@ -445,3 +445,16 @@ tr:hover {
 .pagination a:hover, .pagination .active a {
     background-color: #0056b3;
 }
+.scrollable-select {
+    max-height: 50px; /* Adjust the height as needed */
+    overflow-y: auto; /* Enable vertical scrolling */
+    /* display: block; Ensure proper rendering in all browsers */
+    width: 100%; /* Ensure it spans the container width */
+    /* padding: 5px; */
+    /* font-size: 16px; */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+option{
+    overflow-y:scroll;
+  }
